@@ -27,8 +27,6 @@ public class Reposition : MonoBehaviour
 		Vector3 playerDir = GameManager.instance.Player.inputVec;
 		float dirX = playerDir.x < 0 ? -1 : 1;
 		float dirY = playerDir.y < 0 ? -1 : 1;
-		// diffX = Mathf.Abs(diffX);
-		// diffY = Mathf.Abs(diffY);
 
 		switch (transform.tag) {
 			case "Ground":
