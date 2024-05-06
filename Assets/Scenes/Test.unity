@@ -9811,6 +9811,55 @@ Transform:
   m_Children: []
   m_Father: {fileID: 188616048}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &703413253
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 703413254}
+  - component: {fileID: 703413255}
+  m_Layer: 0
+  m_Name: BoltWeapon
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &703413254
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 703413253}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1634334387}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &703413255
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 703413253}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4aaac7e0c3c35948ad23d1b8c253b62, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 1
+  prefabId: 1
+  damage: 10
+  count: 3
+  speed: 0
 --- !u!1 &1285178582
 GameObject:
   m_ObjectHideFlags: 0
@@ -28565,6 +28614,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefabs:
   - {fileID: 8231515644755493617, guid: 8cff46455c71fca41b15307a48add74a, type: 3}
+  - {fileID: 9106696273672428496, guid: bd0810862515f3646a964ef19e24fe12, type: 3}
 --- !u!4 &1476672864
 Transform:
   m_ObjectHideFlags: 0
@@ -38013,7 +38063,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputVec: {x: 0, y: 0}
-  speed: 5
+  speed: 10
+  scanner: {fileID: 0}
 --- !u!212 &1634334386
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -38081,6 +38132,7 @@ Transform:
   m_Children:
   - {fileID: 1542745088}
   - {fileID: 188616048}
+  - {fileID: 703413254}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!70 &1634334388
@@ -38178,10 +38230,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d9102c1a3be1db4f9e63c4f5a2bbfb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scanRange: 0
+  scanRange: 7
   targetLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   nearestTarget: {fileID: 0}
 --- !u!1 &1893675260
 GameObject:
