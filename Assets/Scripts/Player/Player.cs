@@ -18,6 +18,7 @@ public class Player : MonoBehaviour
 		anim = GetComponent<Animator>();
 
 		rigid.gravityScale = 0;
+		rigid.constraints = RigidbodyConstraints2D.FreezeRotation;
 	}
 
 	void Update()

@@ -19,12 +19,12 @@ public class Reposition : MonoBehaviour
 		if (!collision.CompareTag("Area"))
 			return;
 
-		Vector3 playerPos = GameManager.instance.Player.transform.position;
+		Vector3 playerPos = GameManager.instance.player.transform.position;
 		Vector3 myPos = transform.position;
 		float diffX = Mathf.Abs(playerPos.x - myPos.x);
 		float diffY = Mathf.Abs(playerPos.y - myPos.y);
 
-		Vector3 playerDir = GameManager.instance.Player.inputVec;
+		Vector3 playerDir = GameManager.instance.player.inputVec;
 		float dirX = playerDir.x < 0 ? -1 : 1;
 		float dirY = playerDir.y < 0 ? -1 : 1;
 
