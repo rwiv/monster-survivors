@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -23,7 +24,7 @@ public class Bullet : MonoBehaviour
         this.damage = daamage;
         this.per = per; 
 
-        if(per > -1)
+        if(per >= 0)
         {
             rigid.velocity = dir * 15f;
         }
@@ -32,13 +33,24 @@ public class Bullet : MonoBehaviour
     //관통
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(!collision.CompareTag("Enemy") || per==-1)
+        // 근거리 무기일 때
+        if(!collision.CompareTag("Enemy") || per == -100)
             return;
+        
         per--;
-        if (per == -1)
+        if (per < 0)
         {
             rigid.velocity = Vector2.zero;
             gameObject.SetActive(false);
         }
+    }
+
+    // 총알이 맵 밖으로 벗어나면 삭제
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (!collision.CompareTag("Area") || per == -100)
+            return;
+        
+        gameObject.SetActive(false);
     }
 }

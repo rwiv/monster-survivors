@@ -6,6 +6,7 @@ public class Spawner : MonoBehaviour
 {
     public Transform[] spawnPoint;
     public SpawnData[] spawnData;
+    public float levelTime;
 
     int level;
     float timer;
@@ -13,13 +14,15 @@ public class Spawner : MonoBehaviour
     private void Awake()
     {
         spawnPoint = GetComponentsInChildren<Transform>();
+        // 최대 시간에 몬스터 데이터 크기로 나누어 자동으로 구간 시간 계산
+        levelTime = GameManager.instance.maxGameTime / spawnData.Length;
     }
 
     void Update()
     {
         timer += Time.deltaTime;
         level = Mathf.Min(
-            Mathf.FloorToInt(GameManager.instance.gameTime / 10f),
+            Mathf.FloorToInt(GameManager.instance.gameTime / levelTime),
             spawnData.Length - 1
         );
 

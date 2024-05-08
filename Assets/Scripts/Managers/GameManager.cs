@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class GameManager : MonoBehaviour
 {
@@ -13,9 +12,19 @@ public class GameManager : MonoBehaviour
     public float gameTime;
     public float maxGameTime = 2 * 10f;
 
+    public float health;
+    public float maxHealth;
+    public int level;
+    public int kill;
+    public float exp;
+    public float[] nextExp = { 3, 5, 10, 100, 150, 210, 280, 360, 450, 600 };
+
     void Awake()
     {
         instance = this;
+        
+        maxHealth = 100;
+        health = maxHealth;
     }
     
     void Update()
