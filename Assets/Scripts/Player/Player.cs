@@ -1,23 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class Player : MonoBehaviour
 {
 	public Vector2 inputVec;
 	public float speed;
 	public Scanner scanner;
+	public SpriteRenderer sprite;
 
-	Rigidbody2D rigid;
-	SpriteRenderer spriter;
 	Animator anim;
+	Rigidbody2D rigid;
 
 	void Awake()
 	{
 		scanner = GetComponent<Scanner>();
-		rigid = GetComponent<Rigidbody2D>();
-		spriter = GetComponent<SpriteRenderer>();
+		sprite = GetComponent<SpriteRenderer>();
+		
 		anim = GetComponent<Animator>();
+		rigid = GetComponent<Rigidbody2D>();
 
 		rigid.gravityScale = 0;
 		rigid.constraints = RigidbodyConstraints2D.FreezeRotation;
@@ -40,7 +42,7 @@ public class Player : MonoBehaviour
 		anim.SetFloat("Speed", inputVec.magnitude);
 
 		if (inputVec.x != 0) {
-			spriter.flipX = inputVec.x < 0;
+			sprite.flipX = inputVec.x < 0;
 		}
 	}
 }

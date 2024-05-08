@@ -39015,6 +39015,7 @@ MonoBehaviour:
   inputVec: {x: 0, y: 0}
   speed: 8
   scanner: {fileID: 0}
+  sprite: {fileID: 0}
 --- !u!212 &1634334386
 SpriteRenderer:
   m_ObjectHideFlags: 0

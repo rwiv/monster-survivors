@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -13,10 +14,11 @@ public class Enemy : MonoBehaviour
 	
     public float health;
 	public float maxHealth;
-	public float knockBackPower = 500;
+	public int knockBackPower = 5;
 
 	bool isLive;
 	bool isFilp;
+	bool isKnockBack = false;
 
 	Rigidbody2D rigid;
 	Collider2D coll;
@@ -36,7 +38,7 @@ public class Enemy : MonoBehaviour
 
 	void FixedUpdate()
 	{
-		if (!isLive)
+		if (!isLive || isKnockBack)
 			return;
 
 		Vector2 dirVec = target.position - rigid.position;
@@ -90,13 +92,32 @@ public class Enemy : MonoBehaviour
 	
 	IEnumerator KnockBack()
 	{
+		isKnockBack = true;
+        
 		//yield return null;  // 1프레임 쉬기
 		//yield return new WaitForSeconds(2f);    // 2초 쉬기
 		yield return new WaitForFixedUpdate();//하나의 물리 프레임을 딜레이 주기
+		
 		Vector3 playerPos = GameManager.instance.player.transform.position;
 		Vector3 dirVec = transform.position - playerPos;
-		// rigid.AddForce(dirVec.normalized * 3,ForceMode2D.Impulse);
-		rigid.AddForce(dirVec.normalized * knockBackPower);
+		rigid.AddForce(dirVec.normalized * knockBackPower, ForceMode2D.Impulse);
+		
+		spriter.color = Color.red;
+		yield return new WaitForSeconds(0.1f);
+		spriter.color = Color.white;
+		
+		isKnockBack = false;
+	}
+
+	IEnumerator SetPlayerHitColor()
+	{
+		GameManager.instance.player.sprite.color = Color.red;
+		yield return new WaitForSeconds(0.2f);
+		GameManager.instance.player.sprite.color = Color.white;
+		yield return new WaitForSeconds(0.2f);
+		GameManager.instance.player.sprite.color = Color.red;
+		yield return new WaitForSeconds(0.2f);
+		GameManager.instance.player.sprite.color = Color.white;
 	}
 
 	void onHitBullet(Collider2D collision)
@@ -123,6 +144,7 @@ public class Enemy : MonoBehaviour
 	void onHitPlayer()
 	{
 		GameManager.instance.health--;
+		StartCoroutine(SetPlayerHitColor());
 	}
 
 	void Dead()
