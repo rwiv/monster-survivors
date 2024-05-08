@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,16 +16,20 @@ public class Weapon : MonoBehaviour
     
     private void Awake()
     {
-        player = GetComponentInParent<Player>();
+        player = GameManager.instance.player;
+        // player = GetComponentInParent<Player>();
     }
-    
-    private void Start()
-    {
-        Init();
-    }
+
+    // private void Start()
+    // {
+    //     Init();
+    // }
 
     void Update()
     {
+        if (!GameManager.instance.isLive)
+            return;
+        
         switch (id)
         {
             case 0:
@@ -38,12 +43,6 @@ public class Weapon : MonoBehaviour
                     Fire();
                 }
                 break;
-        }
-    
-        // ..Test Code..
-        if (Input.GetButtonDown("Jump"))
-        {
-            LevelUp(20, 5);
         }
     }
 
@@ -72,6 +71,7 @@ public class Weapon : MonoBehaviour
         {
             Batch();
         }
+        player.BroadcastMessage("ApplyGear", SendMessageOptions.DontRequireReceiver);
     }
     
     public void Init()
@@ -86,6 +86,39 @@ public class Weapon : MonoBehaviour
                 speed = 0.3f;
                 break;
         }
+    }
+    
+    public void Init(ItemData data)
+    {
+        // Basic Set
+        name = "Weapon " + data.itemId;
+        transform.parent = player.transform;
+        transform.localPosition = Vector3.zero;
+
+        // Property Set
+        id = data.itemId;
+        damage = data.baseDamage;
+        count = data.baseCount;
+        for(int index = 0; index < GameManager.instance.pool.prefabs.Length; index++)
+        {
+            if(data.projectile == GameManager.instance.pool.prefabs[index])
+            {
+                prefabId = index;
+                break;
+            }
+        }
+        switch (id)
+        {
+            case 0:
+                speed = 150;
+                Batch();
+                break;
+            default:
+                speed = 0.3f;
+                break;
+        }
+        
+        player.BroadcastMessage("ApplyGear", SendMessageOptions.DontRequireReceiver);
     }
 
     void Batch()

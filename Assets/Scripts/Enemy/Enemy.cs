@@ -18,7 +18,7 @@ public class Enemy : MonoBehaviour
 
 	bool isLive;
 	bool isFilp;
-	bool isKnockBack = false;
+	bool isKnockBack;
 
 	Rigidbody2D rigid;
 	Collider2D coll;
@@ -38,6 +38,7 @@ public class Enemy : MonoBehaviour
 
 	void FixedUpdate()
 	{
+		// if (!isLive)
 		if (!isLive || isKnockBack)
 			return;
 
@@ -73,6 +74,7 @@ public class Enemy : MonoBehaviour
 		rigid.simulated = true;
 		spriter.sortingOrder = 2;
         health = maxHealth;
+		isKnockBack = false;
     }
 
 	private void OnTriggerEnter2D(Collider2D collision)
@@ -83,10 +85,6 @@ public class Enemy : MonoBehaviour
 		if (collision.CompareTag("Bullet"))
 		{
 			onHitBullet(collision);
-		}
-		else if (collision.CompareTag("Player"))
-		{
-			onHitPlayer();
 		}
 	}
 	
@@ -109,17 +107,6 @@ public class Enemy : MonoBehaviour
 		isKnockBack = false;
 	}
 
-	IEnumerator SetPlayerHitColor()
-	{
-		GameManager.instance.player.sprite.color = Color.red;
-		yield return new WaitForSeconds(0.2f);
-		GameManager.instance.player.sprite.color = Color.white;
-		yield return new WaitForSeconds(0.2f);
-		GameManager.instance.player.sprite.color = Color.red;
-		yield return new WaitForSeconds(0.2f);
-		GameManager.instance.player.sprite.color = Color.white;
-	}
-
 	void onHitBullet(Collider2D collision)
 	{
 		health -= collision.GetComponent<Bullet>().damage;
@@ -139,12 +126,6 @@ public class Enemy : MonoBehaviour
 			GameManager.instance.GetExp();
 			Dead();
 		}
-	}
-
-	void onHitPlayer()
-	{
-		GameManager.instance.health--;
-		StartCoroutine(SetPlayerHitColor());
 	}
 
 	void Dead()

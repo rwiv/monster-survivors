@@ -14,7 +14,7 @@ public class Bullet : MonoBehaviour
     private void Awake()
     {
         rigid = GetComponent<Rigidbody2D>();
-
+        
         rigid.gravityScale = 0;
         rigid.constraints = RigidbodyConstraints2D.FreezeRotation;
     }
