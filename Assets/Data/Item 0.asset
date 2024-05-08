@@ -18,7 +18,7 @@ MonoBehaviour:
   itemDesc: 
   itemIcon: {fileID: 0}
   baseDamage: 30
-  baseCount: 0
+  baseCount: 1
   damages:
   - 0.5
   - 1

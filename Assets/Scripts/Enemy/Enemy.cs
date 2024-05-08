@@ -1,10 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Threading;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class Enemy : MonoBehaviour
 {
@@ -38,7 +35,6 @@ public class Enemy : MonoBehaviour
 
 	void FixedUpdate()
 	{
-		// if (!isLive)
 		if (!isLive || isKnockBack)
 			return;
 
@@ -109,7 +105,7 @@ public class Enemy : MonoBehaviour
 
 	void onHitBullet(Collider2D collision)
 	{
-		health -= collision.GetComponent<Bullet>().damage;
+		health -= collision.GetComponent<Projectile>().damage;
 		StartCoroutine(KnockBack());
     
 		if (health > 0) // on hit

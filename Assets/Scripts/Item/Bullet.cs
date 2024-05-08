@@ -1,14 +1,9 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bullet : MonoBehaviour
+public class Bullet : Projectile
 {
-    //프리펩 친구들은 변수 초기화를 하는게 좋다
-    public float damage;
-    public int per;
-
     Rigidbody2D rigid;
     
     private void Awake()
@@ -19,7 +14,7 @@ public class Bullet : MonoBehaviour
         rigid.constraints = RigidbodyConstraints2D.FreezeRotation;
     }
     
-    public void Init(float daamage,int per, Vector3 dir)
+    public void Init(float daamage, int per, Vector3 dir)
     {
         this.damage = daamage;
         this.per = per; 

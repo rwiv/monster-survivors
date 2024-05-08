@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,13 +16,7 @@ public class Weapon : MonoBehaviour
     private void Awake()
     {
         player = GameManager.instance.player;
-        // player = GetComponentInParent<Player>();
     }
-
-    // private void Start()
-    // {
-    //     Init();
-    // }
 
     void Update()
     {
@@ -72,20 +65,6 @@ public class Weapon : MonoBehaviour
             Batch();
         }
         player.BroadcastMessage("ApplyGear", SendMessageOptions.DontRequireReceiver);
-    }
-    
-    public void Init()
-    {
-        switch (id)
-        {
-            case 0:
-                speed = 150;
-                Batch();
-                break;
-            default:
-                speed = 0.3f;
-                break;
-        }
     }
     
     public void Init(ItemData data)
@@ -147,8 +126,7 @@ public class Weapon : MonoBehaviour
             bullet.Rotate(rotVec);
             bullet.Translate(bullet.up * 1.5f, Space.World);
 
-            // 근거리 무기일 때
-            bullet.GetComponent<Bullet>().Init(damage, -100, Vector3.zero); // -100 is Infinity Per.
+            bullet.GetComponent<Projectile>().Init(damage, -100); // -100 is Infinity Per.
         }
     }
 }
