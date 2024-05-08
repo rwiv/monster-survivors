@@ -1,26 +1,32 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class Enemy : MonoBehaviour
 {
 	public float speed;
 	public Rigidbody2D target;
+	public RuntimeAnimatorController[] animCon;
 	
     public float health;
 	public float maxHealth;
-	public RuntimeAnimatorController[] animCon;
+	public float knockBackPower = 500;
 
 	bool isLive;
-	private bool isFilp;
+	bool isFilp;
 
 	Rigidbody2D rigid;
-	private Animator anim;
+	Collider2D coll;
+	Animator anim;
 	SpriteRenderer spriter;
 
 	void Awake()
 	{
 		rigid = GetComponent<Rigidbody2D>();
+		coll = GetComponent<Collider2D>();
 		anim = GetComponent<Animator>();
 		spriter = GetComponent<SpriteRenderer>();
 		
@@ -61,24 +67,62 @@ public class Enemy : MonoBehaviour
     {
         target = GameManager.instance.player.GetComponent<Rigidbody2D>();
         isLive = true;
+		coll.enabled = true;
+		rigid.simulated = true;
+		spriter.sortingOrder = 2;
         health = maxHealth;
     }
-	
+
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
-		if (!collision.CompareTag("Bullet"))
+		if (!isLive)
 			return;
-		health -= collision.GetComponent<Bullet>().damage;
-    
-		if (health > 0)
+
+		if (collision.CompareTag("Bullet"))
 		{
-			// .. Live, Hit Action
+			onHitBullet(collision);
 		}
-		else
+		else if (collision.CompareTag("Player"))
 		{
-			// Dead
+			onHitPlayer();
+		}
+	}
+	
+	IEnumerator KnockBack()
+	{
+		//yield return null;  // 1프레임 쉬기
+		//yield return new WaitForSeconds(2f);    // 2초 쉬기
+		yield return new WaitForFixedUpdate();//하나의 물리 프레임을 딜레이 주기
+		Vector3 playerPos = GameManager.instance.player.transform.position;
+		Vector3 dirVec = transform.position - playerPos;
+		// rigid.AddForce(dirVec.normalized * 3,ForceMode2D.Impulse);
+		rigid.AddForce(dirVec.normalized * knockBackPower);
+	}
+
+	void onHitBullet(Collider2D collision)
+	{
+		health -= collision.GetComponent<Bullet>().damage;
+		StartCoroutine(KnockBack());
+    
+		if (health > 0) // on hit
+		{
+			// ...
+		}
+		else // on dead
+		{
+			isLive = false;
+			coll.enabled = false;
+			rigid.simulated = false;
+			spriter.sortingOrder = 1;
+			GameManager.instance.kill++;
+			GameManager.instance.GetExp();
 			Dead();
 		}
+	}
+
+	void onHitPlayer()
+	{
+		GameManager.instance.health--;
 	}
 
 	void Dead()
