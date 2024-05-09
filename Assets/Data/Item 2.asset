@@ -15,7 +15,7 @@ MonoBehaviour:
   itemType: 2
   itemId: 2
   itemName: "\uC7A5\uAC11"
-  itemDesc: 
+  itemDesc: "\uC5F0\uC0AC\uC18D\uB3C4 {0}% \uC99D\uAC00"
   itemIcon: {fileID: 0}
   baseDamage: 0
   baseCount: 0
