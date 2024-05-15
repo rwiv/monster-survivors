@@ -44,8 +44,8 @@ public class Spawner : MonoBehaviour
 
     void Spawn()
     {
-        int enemyPrefabIdx = 0;
-        GameObject enemy = GameManager.instance.pool.Get(enemyPrefabIdx);    //SpawnData 인스펙터창
+		int prefabIdx = (int)GameManager.Prefab.Enemy;
+        GameObject enemy = GameManager.instance.pool.Get(prefabIdx);    //SpawnData 인스펙터창
         enemy.transform.position = spawnPoint[Random.Range(1,spawnPoint.Length)].position;
 
         SpawnData[] spawnData = GameManager.instance.spawnData;

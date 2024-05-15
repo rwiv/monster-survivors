@@ -19,12 +19,19 @@ public class GameManager : MonoBehaviour
     public int kill;
     public float exp;
     public float[] nextExp;
+    public float[] takeExp;
 
     [Header("Game Objects")]
     public Player player;
     public PoolManager pool;
     public LevelUp uiLevelUp;
     public SpawnData[] spawnData;
+
+    public enum Prefab
+    {
+        Enemy,
+        Gem,
+    }
     
     void Awake()
     {
@@ -73,10 +80,10 @@ public class GameManager : MonoBehaviour
         }
     }
     
-    public void GetExp()
+    public void GetExp(float expNum)
     {
-        exp++;
-        if (exp == nextExp[Mathf.Min(level,nextExp.Length-1)])
+        exp += expNum;
+        if (exp >= nextExp[Mathf.Min(level,nextExp.Length-1)])
         {
             level++;
             exp = 0;
@@ -103,6 +110,7 @@ public class SpawnData
     public RuntimeAnimatorController animCon;
     // public int spriteType;
     // public float spawnTime;
+    public int level;
     public int health;
     public float speed;
     public bool isFlip;

@@ -10,12 +10,14 @@ public class Weapon : MonoBehaviour
     public int count;
     public float speed;
 
+    float range;
     float timer;
     Player player;
     
     private void Awake()
     {
         player = GameManager.instance.player;
+        range = 2f;
     }
 
     void Update()
@@ -51,10 +53,10 @@ public class Weapon : MonoBehaviour
         Transform bullet = GameManager.instance.pool.Get(prefabId).transform;
         bullet.position = transform.position;
         // bullet.rotation = Quaternion.FromToRotation(Vector3.up, dir);
-        bullet.rotation = Quaternion.FromToRotation(Vector3.left, dir);
+        bullet.rotation = Quaternion.FromToRotation(Vector3.right, dir);
         bullet.GetComponent<Bullet>().Init(damage, count, dir); 
     }
-    
+
     public void LevelUp(float damage, int count)
     {
         this.damage = damage;
@@ -124,7 +126,7 @@ public class Weapon : MonoBehaviour
             //회전 코드
             Vector3 rotVec = Vector3.forward * 360 * index / count;
             bullet.Rotate(rotVec);
-            bullet.Translate(bullet.up * 1.5f, Space.World);
+            bullet.Translate(bullet.up * range, Space.World);
 
             bullet.GetComponent<Projectile>().Init(damage, -100); // -100 is Infinity Per.
         }

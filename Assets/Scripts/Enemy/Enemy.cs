@@ -8,7 +8,8 @@ public class Enemy : MonoBehaviour
 	public float speed;
 	public Rigidbody2D target;
 	// public RuntimeAnimatorController[] animCon;
-	
+
+	public int level;
     public float health;
 	public float maxHealth;
 	public int knockBackPower = 5;
@@ -64,6 +65,7 @@ public class Enemy : MonoBehaviour
 		// anim.runtimeAnimatorController = animCon[data.spriteType];
 		anim.runtimeAnimatorController = data.animCon;
 		speed = data.speed;
+		level = data.level;
 		maxHealth = data.health;
 		health = data.health;
 		isFilp = data.isFlip;
@@ -122,22 +124,31 @@ public class Enemy : MonoBehaviour
 		}
 		else // on dead
 		{
-			isLive = false;
-			coll.enabled = false;
-			rigid.simulated = false;
-			spriter.sortingOrder = 1;
-			GameManager.instance.kill++;
-			GameManager.instance.GetExp();
 			Dead();
-			if (GameManager.instance.isLive)
-			{
-				AudioManager.instance.PlaySfx(AudioManager.Sfx.Hit);
-			}
 		}
 	}
 
 	void Dead()
 	{
+		isLive = false;
+		coll.enabled = false;
+		rigid.simulated = false;
+		spriter.sortingOrder = 1;
+		GameManager.instance.kill++;
+		// GameManager.instance.GetExp();
+		
+		// generate gem object
+		int prefabIdx = (int)GameManager.Prefab.Gem;
+        Transform gem = GameManager.instance.pool.Get(prefabIdx).transform;
+        gem.position = transform.position;
+        gem.GetComponent<Gem>().Init(level);
+        
+		
 		gameObject.SetActive(false);
+		
+		if (GameManager.instance.isLive)
+		{
+			AudioManager.instance.PlaySfx(AudioManager.Sfx.Hit);
+		}
 	}
 }

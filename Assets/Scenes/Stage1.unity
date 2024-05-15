@@ -9477,7 +9477,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 7.7222223
+  orthographic size: 13.545724
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -9823,16 +9823,22 @@ MonoBehaviour:
   - 8
   - 9
   - 10
+  takeExp:
+  - 2
+  - 4
+  - 6
   player: {fileID: 1634334385}
   pool: {fileID: 1476672863}
   uiLevelUp: {fileID: 1156328495}
   spawnData:
   - animCon: {fileID: 9100000, guid: 3b99e43979ccab04a968c2928490c658, type: 2}
+    level: 0
     health: 20
     speed: 1.5
     isFlip: 1
   - animCon: {fileID: 9100000, guid: 97adaf5f122844844a0a4757498235cb, type: 2}
-    health: 50
+    level: 1
+    health: 30
     speed: 2.4
     isFlip: 0
 --- !u!4 &102022201
@@ -32125,6 +32131,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefabs:
   - {fileID: 8231515644755493617, guid: 8cff46455c71fca41b15307a48add74a, type: 3}
+  - {fileID: 3883209043582578865, guid: 952bdfaf8914b28438e50d464bd50a5f, type: 3}
   - {fileID: 9106696273672428496, guid: b134a2c696f9b294d8792ef2a15983e3, type: 3}
   - {fileID: 9106696273672428496, guid: bd0810862515f3646a964ef19e24fe12, type: 3}
 --- !u!4 &1476672864
@@ -42514,7 +42521,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d9102c1a3be1db4f9e63c4f5a2bbfb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scanRange: 5
+  scanRange: 10
   targetLayer:
     serializedVersion: 2
     m_Bits: 64
