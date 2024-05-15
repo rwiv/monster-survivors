@@ -31,7 +31,7 @@ public class PoolManager : MonoBehaviour
             if (!item.activeSelf)
             {
                 // 발견하면 select 변수에 할당
-                select=item;
+                select = item;
                 select.SetActive(true);
                 break;
             }

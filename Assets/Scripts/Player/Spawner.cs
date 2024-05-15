@@ -5,8 +5,9 @@ using UnityEngine;
 public class Spawner : MonoBehaviour
 {
     public Transform[] spawnPoint;
-    public SpawnData[] spawnData;
-    public float levelTime;
+    // public SpawnData[] spawnData;
+    // public float levelTime;
+    public float spawnTime;
 
     int level;
     float timer;
@@ -14,8 +15,6 @@ public class Spawner : MonoBehaviour
     private void Awake()
     {
         spawnPoint = GetComponentsInChildren<Transform>();
-        // 최대 시간에 몬스터 데이터 크기로 나누어 자동으로 구간 시간 계산
-        levelTime = GameManager.instance.maxGameTime / spawnData.Length;
     }
 
     void Update()
@@ -24,12 +23,19 @@ public class Spawner : MonoBehaviour
 			return;
 		
         timer += Time.deltaTime;
-        level = Mathf.Min(
-            Mathf.FloorToInt(GameManager.instance.gameTime / levelTime),
-            spawnData.Length - 1
-        );
+        
+        // level = Mathf.Min(
+        //     Mathf.FloorToInt(GameManager.instance.gameTime / levelTime),
+        //     spawnData.Length - 1
+        // );
+        //
+        // if (timer > spawnData[level].spawnTime)
+        // {
+        //     timer = 0;
+        //     Spawn();
+        // }
 
-        if (timer > (spawnData[level].spawnTime))
+        if (timer > spawnTime)
         {
             timer = 0;
             Spawn();
@@ -38,18 +44,22 @@ public class Spawner : MonoBehaviour
 
     void Spawn()
     {
-        GameObject enemy = GameManager.instance.pool.Get(0);    //SpawnData 인스펙터창
+        int enemyPrefabIdx = 0;
+        GameObject enemy = GameManager.instance.pool.Get(enemyPrefabIdx);    //SpawnData 인스펙터창
         enemy.transform.position = spawnPoint[Random.Range(1,spawnPoint.Length)].position;
-        enemy.GetComponent<Enemy>().Init(spawnData[level]);
+
+        SpawnData[] spawnData = GameManager.instance.spawnData;
+        int randIdx = Random.Range(0, spawnData.Length);
+        enemy.GetComponent<Enemy>().Init(spawnData[randIdx]);
     }
 }
 
-[System.Serializable]
-public class SpawnData
-{
-    public int spriteType;
-    public float spawnTime;
-    public int health;
-    public float speed;
-    public bool isFlip;
-}
+// [System.Serializable]
+// public class SpawnData
+// {
+//     public int spriteType;
+//     // public float spawnTime;
+//     public int health;
+//     public float speed;
+//     public bool isFlip;
+// }

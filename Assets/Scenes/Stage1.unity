@@ -9806,7 +9806,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isLive: 1
   gameTime: 0
-  maxGameTime: 300
+  maxGameTime: 30
   health: 0
   maxHealth: 100
   level: 0
@@ -9826,6 +9826,15 @@ MonoBehaviour:
   player: {fileID: 1634334385}
   pool: {fileID: 1476672863}
   uiLevelUp: {fileID: 1156328495}
+  spawnData:
+  - animCon: {fileID: 9100000, guid: 3b99e43979ccab04a968c2928490c658, type: 2}
+    health: 20
+    speed: 1.5
+    isFlip: 1
+  - animCon: {fileID: 9100000, guid: 97adaf5f122844844a0a4757498235cb, type: 2}
+    health: 50
+    speed: 2.4
+    isFlip: 0
 --- !u!4 &102022201
 Transform:
   m_ObjectHideFlags: 0
@@ -9890,18 +9899,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnPoint: []
-  spawnData:
-  - spriteType: 0
-    spawnTime: 0.3
-    health: 10
-    speed: 1.5
-    isFlip: 1
-  - spriteType: 1
-    spawnTime: 0.5
-    health: 15
-    speed: 2.4
-    isFlip: 0
-  levelTime: 0
+  spawnTime: 0.5
 --- !u!1 &229346180
 GameObject:
   m_ObjectHideFlags: 0

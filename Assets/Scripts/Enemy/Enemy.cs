@@ -7,7 +7,7 @@ public class Enemy : MonoBehaviour
 {
 	public float speed;
 	public Rigidbody2D target;
-	public RuntimeAnimatorController[] animCon;
+	// public RuntimeAnimatorController[] animCon;
 	
     public float health;
 	public float maxHealth;
@@ -61,7 +61,8 @@ public class Enemy : MonoBehaviour
 
 	public void Init(SpawnData data)
 	{
-		anim.runtimeAnimatorController = animCon[data.spriteType];
+		// anim.runtimeAnimatorController = animCon[data.spriteType];
+		anim.runtimeAnimatorController = data.animCon;
 		speed = data.speed;
 		maxHealth = data.health;
 		health = data.health;

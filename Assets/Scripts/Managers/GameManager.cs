@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -23,16 +24,27 @@ public class GameManager : MonoBehaviour
     public Player player;
     public PoolManager pool;
     public LevelUp uiLevelUp;
+    public SpawnData[] spawnData;
     
     void Awake()
     {
         instance = this;
         
-        maxHealth = 100;
         health = maxHealth;
         
         // 최초 무기
+        StartCoroutine(OnStart());
+    }
+    
+    IEnumerator OnStart()
+    {
+		yield return new WaitForSeconds(0.1f);
         uiLevelUp.Select(1);
+    }
+
+    public void GameOver()
+    {
+        SceneManager.LoadScene("GameOver");
     }
     
     void Update()
@@ -45,6 +57,7 @@ public class GameManager : MonoBehaviour
         if (gameTime > maxGameTime)
         {
             gameTime = maxGameTime;
+            SceneManager.LoadScene("GameClear");
         }
     }
     
@@ -70,4 +83,15 @@ public class GameManager : MonoBehaviour
         isLive = true;
         Time.timeScale = 1;
     }
+}
+
+[System.Serializable]
+public class SpawnData
+{
+    public RuntimeAnimatorController animCon;
+    // public int spriteType;
+    // public float spawnTime;
+    public int health;
+    public float speed;
+    public bool isFlip;
 }
