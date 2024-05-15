@@ -40,10 +40,22 @@ public class GameManager : MonoBehaviour
     {
 		yield return new WaitForSeconds(0.1f);
         uiLevelUp.Select(1);
+        
+        AudioManager.instance.PlayBgm(true);
+        // AudioManager.instance.PlaySfx(AudioManager.Sfx.Start);
     }
 
+    public void GameClear()
+    {
+        // AudioManager.instance.PlayBgm(false);
+        // AudioManager.instance.PlaySfx(AudioManager.Sfx.Win);
+        SceneManager.LoadScene("GameClear");
+    }
+    
     public void GameOver()
     {
+        // AudioManager.instance.PlayBgm(false);
+        // AudioManager.instance.PlaySfx(AudioManager.Sfx.Lose);
         SceneManager.LoadScene("GameOver");
     }
     
@@ -57,7 +69,7 @@ public class GameManager : MonoBehaviour
         if (gameTime > maxGameTime)
         {
             gameTime = maxGameTime;
-            SceneManager.LoadScene("GameClear");
+            GameClear();
         }
     }
     

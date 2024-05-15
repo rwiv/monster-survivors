@@ -9477,7 +9477,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 13.545724
+  orthographic size: 7.7222223
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -9808,7 +9808,7 @@ MonoBehaviour:
   gameTime: 0
   maxGameTime: 30
   health: 0
-  maxHealth: 100
+  maxHealth: 10
   level: 0
   kill: 0
   exp: 0
@@ -10770,6 +10770,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 497190513}
+  - component: {fileID: 497190515}
   m_Layer: 0
   m_Name: AudioManager
   m_TagString: Untagged
@@ -10792,6 +10793,27 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &497190515
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 497190512}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b068d394819fbce4380903736ec41d42, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bgmClip: {fileID: 8300000, guid: e9d53aca1395f8e44abf3eca399032b9, type: 3}
+  bgmVolume: 0.05
+  sfxClips:
+  - {fileID: 8300000, guid: 99a4cb7d644a30345a4b856c5be1fc58, type: 3}
+  - {fileID: 8300000, guid: 27b4ab423b5cb6b49bac610f31202fc0, type: 3}
+  - {fileID: 8300000, guid: 805d8016323cc3740a6927e631c671cf, type: 3}
+  - {fileID: 8300000, guid: 4b22a89759aaf834aae5a9a77f42ab02, type: 3}
+  sfxVolume: 0.5
+  channels: 16
 --- !u!1 &515511375
 GameObject:
   m_ObjectHideFlags: 0

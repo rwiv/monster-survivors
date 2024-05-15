@@ -9849,7 +9849,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bc4167342deb6d42a75529d39d9ee9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneName: Play
+  sceneName: Stage1
 --- !u!114 &1276975355
 MonoBehaviour:
   m_ObjectHideFlags: 0
