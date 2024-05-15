@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: -7950370382591971310}
   - component: {fileID: -1885119539799482066}
   - component: {fileID: 4925108917835959521}
-  - component: {fileID: 7608234011984079217}
+  - component: {fileID: 597937001858291064}
   m_Layer: 0
   m_Name: Bolt
   m_TagString: Bullet
@@ -174,7 +174,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 0
   per: 0
---- !u!95 &7608234011984079217
+--- !u!95 &597937001858291064
 Animator:
   serializedVersion: 5
   m_ObjectHideFlags: 0

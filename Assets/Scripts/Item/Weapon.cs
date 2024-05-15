@@ -17,7 +17,7 @@ public class Weapon : MonoBehaviour
     private void Awake()
     {
         player = GameManager.instance.player;
-        range = 2f;
+        range = 3f;
     }
 
     void Update()
