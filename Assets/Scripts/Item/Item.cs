@@ -38,7 +38,7 @@ public class Item : MonoBehaviour
                 break;
             case ItemData.ItemType.Glove:
             case ItemData.ItemType.Shoe:
-                textDesc.text = string.Format(data.itemDesc, data.damages[level]*100);
+                textDesc.text = string.Format(data.itemDesc, data.coefs[level]*100);
                 break;
             case ItemData.ItemType.Heal:
                 textDesc.text = string.Format(data.itemDesc);
@@ -73,8 +73,9 @@ public class Item : MonoBehaviour
 
                     nextDamage += data.baseDamage * data.damages[level];
                     nextCount += data.counts[level];
+                    float nextSpeed = 1 + (1f * data.speeds[level]);
 
-                    weapon.LevelUp(nextDamage, nextCount, 1);
+                    weapon.LevelUp(nextDamage, nextCount, 1, nextSpeed);
                 }
                 level++;
                 break;
@@ -95,7 +96,7 @@ public class Item : MonoBehaviour
                     nextCount += data.counts[level];
                     nextCoef = data.baseCoef * data.coefs[level];
 
-                    weapon.LevelUp(nextDamage, nextCount, nextCoef);
+                    weapon.LevelUp(nextDamage, nextCount, nextCoef, 1);
                 }
                 level++;
                 break;
@@ -108,7 +109,7 @@ public class Item : MonoBehaviour
                 }
                 else
                 {
-                    float nextRate = data.damages[level];
+                    float nextRate = data.coefs[level];
                     gear.Levelup(nextRate);
                 }
                 level++;

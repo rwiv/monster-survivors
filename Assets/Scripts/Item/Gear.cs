@@ -16,7 +16,7 @@ public class Gear : MonoBehaviour
 
         // Property Set
         type = data.itemType;
-        rate = data.damages[0];
+        rate = data.coefs[0];
         ApplyGear();
     }
     
@@ -41,24 +41,18 @@ public class Gear : MonoBehaviour
 
     void RateUp()
     {
+        float deafult = GameManager.instance.defaultWeaponSpeedRate;
+        GameManager.instance.weaponSpeedRate = deafult + (deafult * rate);
         Weapon[] weapons = transform.parent.GetComponentsInChildren<Weapon>();
-
+        
         foreach(Weapon weapon in weapons)
         {
-            switch (weapon.id)
-            {
-                case 0:
-                    weapon.speed = 150 + (150 * rate);
-                    break;
-                case 2:
-                    weapon.speed = 0.5f * (1f - rate);
-                    break;
-            }
+            weapon.InitSpeed();
         }
     }
     
     void SpeedUp()
     {
-        GameManager.instance.speed = GameManager.instance.defaultSpeed * rate;
+        GameManager.instance.speed = GameManager.instance.defaultSpeed * (1f + rate);
     }
 }

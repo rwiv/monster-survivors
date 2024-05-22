@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 
 public class GameManager : MonoBehaviour
 {
@@ -16,6 +17,8 @@ public class GameManager : MonoBehaviour
     public float health;
     public float defaultSpeed;
     public float speed;
+    public float defaultWeaponSpeedRate;
+    public float weaponSpeedRate;
     public float maxHealth;
     public int level;
     public int kill;
@@ -41,6 +44,7 @@ public class GameManager : MonoBehaviour
         
         health = maxHealth;
         speed = defaultSpeed;
+        weaponSpeedRate = defaultWeaponSpeedRate;
         
         // 최초 무기
         StartCoroutine(OnStart());

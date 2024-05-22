@@ -20,6 +20,7 @@ MonoBehaviour:
   baseDamage: 10
   baseCount: 1
   baseCoef: 0
+  baseSpeed: 150
   coefs: []
   damages:
   - 0.5
@@ -28,4 +29,10 @@ MonoBehaviour:
   - 2
   - 3
   counts: 0100000001000000010000000100000002000000
+  speeds:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
   projectile: {fileID: 9106696273672428496, guid: b134a2c696f9b294d8792ef2a15983e3, type: 3}

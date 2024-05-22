@@ -9975,6 +9975,8 @@ MonoBehaviour:
   health: 0
   defaultSpeed: 8
   speed: 0
+  defaultWeaponSpeedRate: 1
+  weaponSpeedRate: 0
   maxHealth: 10
   level: 0
   kill: 0

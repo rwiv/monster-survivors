@@ -8,6 +8,7 @@ public class Weapon : MonoBehaviour
     public int prefabId;
     public float damage;
     public int count;
+    public float baseSpeed;
     public float speed;
     public float coef;
 
@@ -55,14 +56,16 @@ public class Weapon : MonoBehaviour
         bullet.position = transform.position;
         // bullet.rotation = Quaternion.FromToRotation(Vector3.up, dir);
         bullet.rotation = Quaternion.FromToRotation(Vector3.right, dir);
-        bullet.GetComponent<Bullet>().Init(damage, count, dir); 
+        bullet.GetComponent<Bullet>().Init(damage, count, dir, 15f); 
     }
 
-    public void LevelUp(float damage, int count, float coef)
+    public void LevelUp(float damage, int count, float coef, float speed)
     {
         this.damage = damage;
         this.count += count;
         this.coef = coef;
+        baseSpeed = GetSpeed(baseSpeed, speed);
+        InitSpeed();
     
         if(id == 0)
         {
@@ -95,15 +98,16 @@ public class Weapon : MonoBehaviour
                 break;
             }
         }
+        
+        baseSpeed = data.baseSpeed;
+        InitSpeed();
 
         switch (id)
         {
             case 0:
-                speed = 150;
                 Batch();
                 break;
             case 1:
-                speed = 0.3f;
                 break;
             case 5:
                 BatchRange(coef);
@@ -111,6 +115,34 @@ public class Weapon : MonoBehaviour
         }
         
         player.BroadcastMessage("ApplyGear", SendMessageOptions.DontRequireReceiver);
+    }
+
+    public void InitSpeed()
+    {
+        float rate = GameManager.instance.weaponSpeedRate;
+        switch (id)
+        {
+            case 0:
+                speed = baseSpeed * rate;
+                break;
+            case 1:
+                speed = baseSpeed / rate;
+                break;
+        }
+    }
+    
+    
+    float GetSpeed(float speed, float rate)
+    {
+        switch (id)
+        {
+            case 0:
+                return speed * rate;
+            case 1:
+                return speed / rate;
+            default:
+                return speed;
+        }
     }
 
     void BatchRange(float coef)

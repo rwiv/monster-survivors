@@ -42,8 +42,9 @@ public class ItemTest : MonoBehaviour
 
                     nextDamage += data.baseDamage * data.damages[level];
                     nextCount += data.counts[level];
+                    float nextSpeed = 1 + (1f * data.speeds[level]);
 
-                    weapon.LevelUp(nextDamage, nextCount, 1);
+                    weapon.LevelUp(nextDamage, nextCount, 1, nextSpeed);
                 }
                 level++;
                 break;
@@ -64,7 +65,7 @@ public class ItemTest : MonoBehaviour
                     nextCount += data.counts[level];
                     nextCoef += data.baseCoef * data.coefs[level];
 
-                    weapon.LevelUp(nextDamage, nextCount, nextCoef);
+                    weapon.LevelUp(nextDamage, nextCount, nextCoef, 1);
                 }
                 level++;
                 break;

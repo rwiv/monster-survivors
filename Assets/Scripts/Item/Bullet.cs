@@ -14,14 +14,14 @@ public class Bullet : Projectile
         rigid.constraints = RigidbodyConstraints2D.FreezeRotation;
     }
     
-    public void Init(float daamage, int per, Vector3 dir)
+    public void Init(float daamage, int per, Vector3 dir, float velocity)
     {
         this.damage = daamage;
         this.per = per; 
 
         if(per >= 0)
         {
-            rigid.velocity = dir * 15f;
+            rigid.velocity = dir * velocity;
         }
     }
     

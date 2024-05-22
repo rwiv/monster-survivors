@@ -19,9 +19,11 @@ public class ItemData : ScriptableObject
     public float baseDamage;
     public int baseCount;
     public float baseCoef;
+    public float baseSpeed;
     public float[] coefs;
     public float[] damages;
     public int[] counts;
+    public float[] speeds;
 
 
     [Header("# Weapon")]
