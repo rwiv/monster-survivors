@@ -33,8 +33,18 @@ public class Item : MonoBehaviour
         switch (data.itemType)
         {
             case ItemData.ItemType.Melee:
-            case ItemData.ItemType.Range:
                 textDesc.text = string.Format(data.itemDesc, data.damages[level]*100, data.counts[level]);
+                break;
+            case ItemData.ItemType.Range:
+                switch (data.itemId)
+                {
+                    case 1:
+                        textDesc.text = string.Format(data.itemDesc, data.speeds[level]*100);
+                        break;
+                    case 6:
+                        textDesc.text = string.Format(data.itemDesc, data.damages[level]*100, data.speeds[level]);
+                        break;
+                }
                 break;
             case ItemData.ItemType.Glove:
             case ItemData.ItemType.Shoe:

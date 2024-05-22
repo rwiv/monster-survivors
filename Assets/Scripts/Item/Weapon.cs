@@ -33,6 +33,7 @@ public class Weapon : MonoBehaviour
                 transform.Rotate(Vector3.back * speed * Time.deltaTime);
                 break;
             case 1:
+            case 6:
                 timer += Time.deltaTime;
                 if (timer > speed)
                 {
@@ -56,7 +57,7 @@ public class Weapon : MonoBehaviour
         bullet.position = transform.position;
         // bullet.rotation = Quaternion.FromToRotation(Vector3.up, dir);
         bullet.rotation = Quaternion.FromToRotation(Vector3.right, dir);
-        bullet.GetComponent<Bullet>().Init(damage, count, dir, 15f); 
+        bullet.GetComponent<Bullet>().Init(damage, count, dir); 
     }
 
     public void LevelUp(float damage, int count, float coef, float speed)
@@ -107,8 +108,6 @@ public class Weapon : MonoBehaviour
             case 0:
                 Batch();
                 break;
-            case 1:
-                break;
             case 5:
                 BatchRange(coef);
                 break;
@@ -126,6 +125,7 @@ public class Weapon : MonoBehaviour
                 speed = baseSpeed * rate;
                 break;
             case 1:
+            case 6:
                 speed = baseSpeed / rate;
                 break;
         }
@@ -139,6 +139,7 @@ public class Weapon : MonoBehaviour
             case 0:
                 return speed * rate;
             case 1:
+            case 6:
                 return speed / rate;
             default:
                 return speed;

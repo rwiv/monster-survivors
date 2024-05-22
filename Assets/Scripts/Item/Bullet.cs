@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Bullet : Projectile
 {
+    public float velocity;
     Rigidbody2D rigid;
     
     private void Awake()
@@ -14,7 +15,7 @@ public class Bullet : Projectile
         rigid.constraints = RigidbodyConstraints2D.FreezeRotation;
     }
     
-    public void Init(float daamage, int per, Vector3 dir, float velocity)
+    public void Init(float daamage, int per, Vector3 dir)
     {
         this.damage = daamage;
         this.per = per; 
