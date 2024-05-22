@@ -14,6 +14,8 @@ public class GameManager : MonoBehaviour
 
     [Header("Player Info")]
     public float health;
+    public float defaultSpeed;
+    public float speed;
     public float maxHealth;
     public int level;
     public int kill;
@@ -38,6 +40,7 @@ public class GameManager : MonoBehaviour
         instance = this;
         
         health = maxHealth;
+        speed = defaultSpeed;
         
         // 최초 무기
         StartCoroutine(OnStart());

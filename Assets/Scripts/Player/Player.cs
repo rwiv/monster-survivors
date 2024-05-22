@@ -5,7 +5,6 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
 	public Vector2 inputVec;
-	public float speed;
 	public Scanner scanner;
 	public SpriteRenderer sprite;
 
@@ -37,7 +36,8 @@ public class Player : MonoBehaviour
 	{
 		if (!GameManager.instance.isLive)
 			return;
-		
+
+		float speed = GameManager.instance.speed;
 		Vector2 nextVec = inputVec.normalized * speed * Time.fixedDeltaTime;
 		rigid.MovePosition(rigid.position + nextVec);
 	}

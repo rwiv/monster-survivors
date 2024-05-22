@@ -9,6 +9,7 @@ public class Weapon : MonoBehaviour
     public float damage;
     public int count;
     public float speed;
+    public float coef;
 
     float range;
     float timer;
@@ -30,7 +31,7 @@ public class Weapon : MonoBehaviour
             case 0:
                 transform.Rotate(Vector3.back * speed * Time.deltaTime);
                 break;
-            default:
+            case 1:
                 timer += Time.deltaTime;
                 if (timer > speed)
                 {
@@ -57,14 +58,19 @@ public class Weapon : MonoBehaviour
         bullet.GetComponent<Bullet>().Init(damage, count, dir); 
     }
 
-    public void LevelUp(float damage, int count)
+    public void LevelUp(float damage, int count, float coef)
     {
         this.damage = damage;
         this.count += count;
+        this.coef = coef;
     
         if(id == 0)
         {
             Batch();
+        }
+        else if (id == 5)
+        {
+            BatchRange(coef);
         }
         player.BroadcastMessage("ApplyGear", SendMessageOptions.DontRequireReceiver);
     }
@@ -80,6 +86,7 @@ public class Weapon : MonoBehaviour
         id = data.itemId;
         damage = data.baseDamage;
         count = data.baseCount;
+        coef = data.baseCoef;
         for(int index = 0; index < GameManager.instance.pool.prefabs.Length; index++)
         {
             if(data.projectile == GameManager.instance.pool.prefabs[index])
@@ -88,18 +95,28 @@ public class Weapon : MonoBehaviour
                 break;
             }
         }
+
         switch (id)
         {
             case 0:
                 speed = 150;
                 Batch();
                 break;
-            default:
+            case 1:
                 speed = 0.3f;
+                break;
+            case 5:
+                BatchRange(coef);
                 break;
         }
         
         player.BroadcastMessage("ApplyGear", SendMessageOptions.DontRequireReceiver);
+    }
+
+    void BatchRange(float coef)
+    {
+        GameObject bullet = GameManager.instance.pool.Get(prefabId);
+        bullet.GetComponent<RangeBullet>().Init(damage, coef);
     }
 
     void Batch()

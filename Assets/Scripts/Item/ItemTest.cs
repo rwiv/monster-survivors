@@ -43,7 +43,28 @@ public class ItemTest : MonoBehaviour
                     nextDamage += data.baseDamage * data.damages[level];
                     nextCount += data.counts[level];
 
-                    weapon.LevelUp(nextDamage, nextCount);
+                    weapon.LevelUp(nextDamage, nextCount, 1);
+                }
+                level++;
+                break;
+            case ItemData.ItemType.Flare:
+                if(level == 0)
+                {
+                    GameObject newWeapon = new GameObject();
+                    weapon = newWeapon.AddComponent<Weapon>();
+                    weapon.Init(data);
+                }
+                else
+                {
+                    float nextDamage = data.baseDamage;
+                    int nextCount = 0;
+                    float nextCoef = data.baseCoef;
+
+                    nextDamage += data.baseDamage * data.damages[level];
+                    nextCount += data.counts[level];
+                    nextCoef += data.baseCoef * data.coefs[level];
+
+                    weapon.LevelUp(nextDamage, nextCount, nextCoef);
                 }
                 level++;
                 break;

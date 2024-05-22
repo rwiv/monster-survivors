@@ -50,7 +50,7 @@ public class Gear : MonoBehaviour
                 case 0:
                     weapon.speed = 150 + (150 * rate);
                     break;
-                default:
+                case 2:
                     weapon.speed = 0.5f * (1f - rate);
                     break;
             }
@@ -59,7 +59,6 @@ public class Gear : MonoBehaviour
     
     void SpeedUp()
     {
-        float speed = 3;
-        GameManager.instance.player.speed = speed + speed * rate;
+        GameManager.instance.speed = GameManager.instance.defaultSpeed * rate;
     }
 }

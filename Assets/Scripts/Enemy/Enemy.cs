@@ -17,6 +17,7 @@ public class Enemy : MonoBehaviour
 	bool isLive;
 	bool isFilp;
 	bool isKnockBack;
+	public bool isHeat;
 
 	Rigidbody2D rigid;
 	Collider2D coll;
@@ -46,6 +47,20 @@ public class Enemy : MonoBehaviour
 		Vector2 nextVec = dirVec.normalized * speed * Time.fixedDeltaTime;
 		rigid.MovePosition(rigid.position + nextVec);
 		rigid.velocity = Vector2.zero;
+
+	}
+
+	private void Update()
+	{
+		if (isHeat)
+		{
+			spriter.color = Color.red;
+		}
+		else
+		{
+			
+			spriter.color = Color.white;
+		}
 	}
 
 	void LateUpdate()
@@ -69,6 +84,7 @@ public class Enemy : MonoBehaviour
 		maxHealth = data.health;
 		health = data.health;
 		isFilp = data.isFlip;
+		isHeat = false;
 	}
 
 	private void OnEnable()
@@ -105,9 +121,11 @@ public class Enemy : MonoBehaviour
 		Vector3 dirVec = transform.position - playerPos;
 		rigid.AddForce(dirVec.normalized * knockBackPower, ForceMode2D.Impulse);
 		
-		spriter.color = Color.red;
+		// spriter.color = Color.red;
+		isHeat = true;
 		yield return new WaitForSeconds(0.1f);
-		spriter.color = Color.white;
+		isHeat = false;
+		// spriter.color = Color.white;
 		
 		isKnockBack = false;
 	}
@@ -128,7 +146,7 @@ public class Enemy : MonoBehaviour
 		}
 	}
 
-	void Dead()
+	public void Dead()
 	{
 		isLive = false;
 		coll.enabled = false;
@@ -143,7 +161,6 @@ public class Enemy : MonoBehaviour
         gem.position = transform.position;
         gem.GetComponent<Gem>().Init(level);
         
-		
 		gameObject.SetActive(false);
 		
 		if (GameManager.instance.isLive)

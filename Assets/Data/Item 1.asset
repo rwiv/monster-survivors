@@ -14,11 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemType: 1
   itemId: 1
-  itemName: "\uCD1D 2"
+  itemName: "\uBC1C\uC0AC \uB9C8\uBC95 1"
   itemDesc: "\uB370\uBBF8\uC9C0 {0}% \uC99D\uAC00\n\uAD00\uD1B5\uB825 {1}\uAC1C \uCD94\uAC00"
-  itemIcon: {fileID: 0}
+  itemIcon: {fileID: 21300000, guid: 39df0568c4d754b4ca1d2d504856ef52, type: 3}
   baseDamage: 5
   baseCount: 0
+  baseCoef: 0
+  coefs: []
   damages:
   - 0.5
   - 1

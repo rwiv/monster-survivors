@@ -5,7 +5,6 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     
-    //프리펩 친구들은 변수 초기화를 하는게 좋다
     public float damage;
     public int per;
 
