@@ -24,6 +24,7 @@ public class AudioManager : MonoBehaviour
         LevelUp,
         Select,
         TakeGem,
+        NextStage,
     };
 
 	void Awake()

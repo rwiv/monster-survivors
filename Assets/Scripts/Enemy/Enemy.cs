@@ -10,6 +10,7 @@ public class Enemy : MonoBehaviour
 	// public RuntimeAnimatorController[] animCon;
 
 	public int level;
+	public int[] stages;
     public float health;
 	public float maxHealth;
 	public int knockBackPower = 5;
@@ -81,6 +82,7 @@ public class Enemy : MonoBehaviour
 		anim.runtimeAnimatorController = data.animCon;
 		speed = data.speed;
 		level = data.level;
+		stages = data.stages;
 		maxHealth = data.health;
 		health = data.health;
 		isFilp = data.isFlip;

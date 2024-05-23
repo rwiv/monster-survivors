@@ -5,9 +5,6 @@ using UnityEngine;
 public class Spawner : MonoBehaviour
 {
     public Transform[] spawnPoint;
-    // public SpawnData[] spawnData;
-    // public float levelTime;
-    public float spawnTime;
 
     int level;
     float timer;
@@ -23,19 +20,8 @@ public class Spawner : MonoBehaviour
 			return;
 		
         timer += Time.deltaTime;
-        
-        // level = Mathf.Min(
-        //     Mathf.FloorToInt(GameManager.instance.gameTime / levelTime),
-        //     spawnData.Length - 1
-        // );
-        //
-        // if (timer > spawnData[level].spawnTime)
-        // {
-        //     timer = 0;
-        //     Spawn();
-        // }
 
-        if (timer > spawnTime)
+        if (timer > GameManager.instance.spawnTimes[GameManager.instance.stage])
         {
             timer = 0;
             Spawn();
@@ -46,20 +32,29 @@ public class Spawner : MonoBehaviour
     {
 		int prefabIdx = (int)GameManager.Prefab.Enemy;
         GameObject enemy = GameManager.instance.pool.Get(prefabIdx);    //SpawnData 인스펙터창
-        enemy.transform.position = spawnPoint[Random.Range(1,spawnPoint.Length)].position;
+        enemy.transform.position = spawnPoint[Random.Range(1, spawnPoint.Length)].position;
 
-        SpawnData[] spawnData = GameManager.instance.spawnData;
-        int randIdx = Random.Range(0, spawnData.Length);
-        enemy.GetComponent<Enemy>().Init(spawnData[randIdx]);
+        List<SpawnData> targets = new List<SpawnData>();
+        foreach (var spawnData in GameManager.instance.spawnData)
+        {
+            if (Contains(spawnData.stages, GameManager.instance.stage))
+            {
+                targets.Add(spawnData);
+            }
+        }
+        int idx = Random.Range(0, targets.Count);
+        enemy.GetComponent<Enemy>().Init(targets[idx]);
+    }
+
+    private bool Contains(int[] ints, int target)
+    {
+        foreach (var i in ints)
+        {
+            if (i == target)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 }
-
-// [System.Serializable]
-// public class SpawnData
-// {
-//     public int spriteType;
-//     // public float spawnTime;
-//     public int health;
-//     public float speed;
-//     public bool isFlip;
-// }

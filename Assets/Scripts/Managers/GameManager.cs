@@ -11,7 +11,9 @@ public class GameManager : MonoBehaviour
     [Header("Game Control")]
     public bool isLive;
     public float gameTime;
-    public float maxGameTime = 2 * 10f;
+    public float maxGameTime;
+    public int stage;
+    public int lastStage;
 
     [Header("Player Info")]
     public float health;
@@ -25,6 +27,7 @@ public class GameManager : MonoBehaviour
     public float exp;
     public float[] nextExp;
     public float[] takeExp;
+    public float[] spawnTimes;
 
     [Header("Game Objects")]
     public Player player;
@@ -59,7 +62,21 @@ public class GameManager : MonoBehaviour
         // AudioManager.instance.PlaySfx(AudioManager.Sfx.Start);
     }
 
-    public void GameClear()
+    void NextStage()
+    {
+        if (stage == lastStage)
+        {
+            GameClear();
+        }
+        else
+        {
+            stage++;
+            gameTime = 0;
+            AudioManager.instance.PlaySfx(AudioManager.Sfx.NextStage);
+        }
+    }
+
+    void GameClear()
     {
         // AudioManager.instance.PlayBgm(false);
         // AudioManager.instance.PlaySfx(AudioManager.Sfx.Win);
@@ -83,7 +100,7 @@ public class GameManager : MonoBehaviour
         if (gameTime > maxGameTime)
         {
             gameTime = maxGameTime;
-            GameClear();
+            NextStage();
         }
     }
     
@@ -115,9 +132,8 @@ public class GameManager : MonoBehaviour
 public class SpawnData
 {
     public RuntimeAnimatorController animCon;
-    // public int spriteType;
-    // public float spawnTime;
     public int level;
+    public int[] stages;
     public int health;
     public float speed;
     public bool isFlip;
