@@ -56,7 +56,7 @@ public class GameManager : MonoBehaviour
     IEnumerator OnStart()
     {
 		yield return new WaitForSeconds(0.1f);
-        uiLevelUp.Select(1);
+        // uiLevelUp.Select(1);
         
         AudioManager.instance.PlayBgm(true);
         // AudioManager.instance.PlaySfx(AudioManager.Sfx.Start);

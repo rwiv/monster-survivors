@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -10,6 +11,9 @@ public class Player : MonoBehaviour
 
 	Animator anim;
 	Rigidbody2D rigid;
+	Collider2D coll;
+
+	float prevHealth;
 
 	void Awake()
 	{
@@ -18,6 +22,7 @@ public class Player : MonoBehaviour
 		
 		anim = GetComponent<Animator>();
 		rigid = GetComponent<Rigidbody2D>();
+		coll = GetComponent<Collider2D>();
 
 		rigid.gravityScale = 0;
 		rigid.constraints = RigidbodyConstraints2D.FreezeRotation;
@@ -25,15 +30,43 @@ public class Player : MonoBehaviour
 
 	void Update()
 	{
+		if (anim.GetCurrentAnimatorStateInfo(0).IsName("Player_Roll"))
+		{
+			coll.isTrigger = true;
+		}
+		else
+		{
+			coll.isTrigger = false;
+		}
+		
 		if (!GameManager.instance.isLive)
 			return;
-		
+	       
 		inputVec.x = Input.GetAxisRaw("Horizontal");
 		inputVec.y = Input.GetAxisRaw("Vertical");
+
+		if (Input.GetKeyDown("space"))
+		{
+			StartCoroutine(Roll());
+		}
 	}
 
+	IEnumerator Roll()
+	{
+		anim.SetBool("Roll", true);
+		yield return new WaitForSeconds(0.1f);
+		anim.SetBool("Roll", false);
+	}
+	
 	void FixedUpdate()
 	{
+		float curHealth = GameManager.instance.health;
+		if (prevHealth == curHealth)
+		{
+			sprite.color = Color.white;
+		}
+		prevHealth = curHealth;
+		
 		if (!GameManager.instance.isLive)
 			return;
 
