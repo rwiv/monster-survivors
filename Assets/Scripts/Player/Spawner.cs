@@ -24,14 +24,21 @@ public class Spawner : MonoBehaviour
         if (timer > GameManager.instance.spawnTimes[GameManager.instance.stage])
         {
             timer = 0;
-            Spawn();
+            if (Random.Range(1, 100) < GameManager.instance.specialRate)
+            {
+                SpawnTriggerEnemy(3);
+            }
+            else
+            {
+                Spawn();
+            }
         }
     }
 
     void Spawn()
     {
 		int prefabIdx = (int)GameManager.Prefab.Enemy;
-        GameObject enemy = GameManager.instance.pool.Get(prefabIdx);    //SpawnData 인스펙터창
+        GameObject enemy = GameManager.instance.pool.Get(prefabIdx);
         enemy.transform.position = spawnPoint[Random.Range(1, spawnPoint.Length)].position;
 
         List<SpawnData> targets = new List<SpawnData>();
@@ -56,5 +63,32 @@ public class Spawner : MonoBehaviour
             }
         }
         return false;
+    }
+    
+	public void SpawnTriggerEnemy(int idx)
+	{
+		int prefabIdx = (int)GameManager.Prefab.Enemy;
+        GameObject enemy = GameManager.instance.pool.Get(prefabIdx);
+
+        Spawner spawner = GameManager.instance.spawner;
+        enemy.transform.position = spawner.spawnPoint[Random.Range(1, spawner.spawnPoint.Length)].position;
+        Vector3 orgScale = enemy.transform.localScale;
+        float coef = 0.5f;
+        enemy.transform.localScale = new Vector3(orgScale.x * coef, orgScale.y * coef, orgScale.z);
+
+        SpawnData target = GameManager.instance.spawnData[idx];
+        enemy.GetComponent<Enemy>().Init(target);
+	}
+
+    public void SpawnTarget(int idx)
+    {
+		int prefabIdx = (int)GameManager.Prefab.Enemy;
+        GameObject enemy = GameManager.instance.pool.Get(prefabIdx);
+        
+        Spawner spawner = GameManager.instance.spawner;
+        enemy.transform.position = spawner.spawnPoint[Random.Range(1, spawner.spawnPoint.Length)].position;
+
+        SpawnData target = GameManager.instance.spawnData[idx];
+        enemy.GetComponent<Enemy>().Init(target);
     }
 }

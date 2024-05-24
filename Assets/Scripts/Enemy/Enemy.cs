@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,11 +13,13 @@ public class Enemy : MonoBehaviour
     public float health;
 	public float maxHealth;
 	public int knockBackPower = 5;
+	public bool isHeat;
 
 	bool isLive;
 	bool isFilp;
 	bool isKnockBack;
-	public bool isHeat;
+	bool isTrigger;
+	bool isAutoSpawn;
 
 	Rigidbody2D rigid;
 	Collider2D coll;
@@ -86,6 +87,8 @@ public class Enemy : MonoBehaviour
 		maxHealth = data.health;
 		health = data.health;
 		isFilp = data.isFlip;
+		isTrigger = data.isTrigger;
+		isAutoSpawn = data.isAutoSpawn;
 		isHeat = false;
 	}
 
@@ -168,6 +171,14 @@ public class Enemy : MonoBehaviour
 		if (GameManager.instance.isLive)
 		{
 			AudioManager.instance.PlaySfx(AudioManager.Sfx.Hit);
+		}
+
+		if (isTrigger)
+		{
+			for (int i = 0; i < GameManager.instance.triggerGenCnt; i++)
+			{
+				GameManager.instance.spawner.SpawnTarget(4);
+			}
 		}
 	}
 }

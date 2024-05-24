@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.Serialization;
 
 public class GameManager : MonoBehaviour
 {
@@ -28,12 +27,15 @@ public class GameManager : MonoBehaviour
     public float[] nextExp;
     public float[] takeExp;
     public float[] spawnTimes;
+    public int specialRate;
+    public int triggerGenCnt;
 
     [Header("Game Objects")]
     public Player player;
     public PoolManager pool;
     public LevelUp uiLevelUp;
     public SpawnData[] spawnData;
+	public Spawner spawner;
 
     public enum Prefab
     {
@@ -56,7 +58,7 @@ public class GameManager : MonoBehaviour
     IEnumerator OnStart()
     {
 		yield return new WaitForSeconds(0.1f);
-        // uiLevelUp.Select(1);
+        uiLevelUp.Select(1);
         
         AudioManager.instance.PlayBgm(true);
         // AudioManager.instance.PlaySfx(AudioManager.Sfx.Start);
@@ -137,4 +139,6 @@ public class SpawnData
     public int health;
     public float speed;
     public bool isFlip;
+    public bool isTrigger;
+    public bool isAutoSpawn;
 }

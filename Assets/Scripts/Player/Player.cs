@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -47,6 +46,7 @@ public class Player : MonoBehaviour
 
 		if (Input.GetKeyDown("space"))
 		{
+			// GameManager.instance.spawner.SpawnTriggerEnemy(3);
 			StartCoroutine(Roll());
 		}
 	}
