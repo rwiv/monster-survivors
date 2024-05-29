@@ -13,6 +13,7 @@ public class Player : MonoBehaviour
 	Collider2D coll;
 
 	float prevHealth;
+	bool isRoll;
 
 	void Awake()
 	{
@@ -25,11 +26,12 @@ public class Player : MonoBehaviour
 
 		rigid.gravityScale = 0;
 		rigid.constraints = RigidbodyConstraints2D.FreezeRotation;
+		isRoll = false;
 	}
 
 	void Update()
 	{
-		if (anim.GetCurrentAnimatorStateInfo(0).IsName("Player_Roll"))
+		if (isRoll)
 		{
 			coll.isTrigger = true;
 		}
@@ -44,8 +46,9 @@ public class Player : MonoBehaviour
 		inputVec.x = Input.GetAxisRaw("Horizontal");
 		inputVec.y = Input.GetAxisRaw("Vertical");
 
-		if (Input.GetKeyDown("space"))
+		if (Input.GetKeyDown(KeyCode.LeftShift))
 		{
+			isRoll = true;
 			// GameManager.instance.spawner.SpawnTriggerEnemy(3);
 			StartCoroutine(Roll());
 		}
@@ -56,6 +59,9 @@ public class Player : MonoBehaviour
 		anim.SetBool("Roll", true);
 		yield return new WaitForSeconds(0.1f);
 		anim.SetBool("Roll", false);
+		
+		yield return new WaitForSeconds(0.1f);
+		isRoll = false;
 	}
 	
 	void FixedUpdate()
@@ -72,6 +78,12 @@ public class Player : MonoBehaviour
 
 		float speed = GameManager.instance.speed;
 		Vector2 nextVec = inputVec.normalized * speed * Time.fixedDeltaTime;
+
+		if (isRoll)
+		{
+			nextVec *= 2.2f;
+		}
+			
 		rigid.MovePosition(rigid.position + nextVec);
 	}
 

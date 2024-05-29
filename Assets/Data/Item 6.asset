@@ -18,7 +18,7 @@ MonoBehaviour:
   itemDesc: "\uB370\uBBF8\uC9C0 {0}% \uC99D\uAC00\n\uACF5\uACA9\uC18D\uB3C4 {1}%
     \uC99D\uAC00"
   itemIcon: {fileID: 21300000, guid: ec02f70cf77d2be4d8b0b0884cc2c55d, type: 3}
-  baseDamage: 20
+  baseDamage: 10
   baseCount: 100
   baseCoef: 0
   baseSpeed: 1

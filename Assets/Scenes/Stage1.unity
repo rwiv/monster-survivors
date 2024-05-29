@@ -9971,7 +9971,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isLive: 1
   gameTime: 0
-  maxGameTime: 10
+  maxGameTime: 30
   stage: 0
   lastStage: 2
   health: 0
@@ -9979,21 +9979,21 @@ MonoBehaviour:
   speed: 0
   defaultWeaponSpeedRate: 1
   weaponSpeedRate: 0
-  maxHealth: 10
+  maxHealth: 30
   level: 0
   kill: 0
   exp: 0
   nextExp:
-  - 1
-  - 2
-  - 3
-  - 4
   - 5
-  - 6
-  - 7
-  - 8
-  - 9
   - 10
+  - 20
+  - 20
+  - 20
+  - 20
+  - 20
+  - 20
+  - 20
+  - 50
   takeExp:
   - 2
   - 4
@@ -10002,7 +10002,7 @@ MonoBehaviour:
   - 0.5
   - 0.4
   - 0.3
-  specialRate: 5
+  specialRate: 2
   triggerGenCnt: 10
   player: {fileID: 1634334385}
   pool: {fileID: 1476672863}
@@ -10012,7 +10012,7 @@ MonoBehaviour:
     level: 0
     stages: 0000000001000000
     health: 20
-    speed: 1.5
+    speed: 4
     isFlip: 1
     isTrigger: 0
     isAutoSpawn: 0
@@ -10020,7 +10020,7 @@ MonoBehaviour:
     level: 1
     stages: 0100000002000000
     health: 30
-    speed: 3
+    speed: 6
     isFlip: 1
     isTrigger: 0
     isAutoSpawn: 0
@@ -10028,7 +10028,7 @@ MonoBehaviour:
     level: 2
     stages: 02000000
     health: 40
-    speed: 4
+    speed: 8
     isFlip: 1
     isTrigger: 0
     isAutoSpawn: 0
@@ -10036,15 +10036,15 @@ MonoBehaviour:
     level: 2
     stages: 
     health: 40
-    speed: 1
+    speed: 4
     isFlip: 0
     isTrigger: 1
     isAutoSpawn: 0
   - animCon: {fileID: 9100000, guid: 97adaf5f122844844a0a4757498235cb, type: 2}
     level: 2
     stages: 
-    health: 40
-    speed: 6
+    health: 60
+    speed: 8
     isFlip: 0
     isTrigger: 0
     isAutoSpawn: 1
